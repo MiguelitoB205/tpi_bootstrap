@@ -165,26 +165,8 @@ const CategoriaDetalle= () => {
   const params = useParams()
    
   const categoriasFiltradas = libros.filter((libro => libro.categoria_id===Number(params.categoria_id)) ) 
-  const categoriasSeleccionadas = categoriasFiltradas.map(category=><div>
-    <div style={{backgroundColor: 'skyblue', borderRadius: '50px', margin: '27px', padding: '27px'}}>
-      <Link to ={'/productoDetalle/' + category.id}>
-    <div>
-    <h1 style={{fontSize: '40px', color: 'blueviolet'}}>{category.nombre}</h1>
-    <img src={category.imagen} width='200px' height='190px' />
-    <p><strong>Título: </strong>  {category.titulo}</p>
-    <p> <strong>Autor: </strong>{category.autor}</p>
-    <p><strong>Categoría: </strong>{category.categoria}</p>
-    <p><strong>{category.precio}</strong></p>
-    <p><strong>Descripción: </strong>{category.resena}</p>
-    </div> 
-      </Link>
-      <Outlet/>
-      <button onClick={()=>setItem(libros)}>
-            <FontAwesomeIcon icon={faHeart} style={{width: '50px', height: '50px', color: 'red', backgroundColor: 'pink'}}/>
-        </button>
-    </div>
-  </div>
-    )
+  
+    
    
   
     return(
