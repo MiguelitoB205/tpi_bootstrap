@@ -143,17 +143,17 @@ const ProductoDetalle= () =>{
   return (
     <>
       <Header />
-      <div >
+      <div style={{padding: '50px'}}>
         {libroSeleccionado ? (
-          <div style={{backgroundColor: 'violet', fontSize: '20px', justifyContent:'center'}}> 
-            <h1> {libroSeleccionado.nombre}</h1>
+          <div style={{backgroundColor: 'violet', fontSize: '20px', padding: '50px', borderRadius: '20px'}}> 
+            <h1 style={{padding:'29px', color: 'darkblue'}}> {libroSeleccionado.nombre}</h1>
             <img src={libroSeleccionado.imagen} alt={libroSeleccionado.nombre}
             width='300px' height='200px' />
-            <p>Título: {libroSeleccionado.titulo}</p>
-            <p>Autor: {libroSeleccionado.autor}</p>
-            <p>Categoría: {libroSeleccionado.categoria}</p>
-            <p>Precio: {libroSeleccionado.precio}</p>
-            <p>Reseña: {libroSeleccionado.resena}</p>
+            <p><strong>Título: </strong> {libroSeleccionado.titulo}</p>
+            <p><strong>Autor: </strong> {libroSeleccionado.autor}</p>
+            <p><strong>Categoría: </strong> {libroSeleccionado.categoria}</p>
+            <p><strong>Precio: </strong> {libroSeleccionado.precio}</p>
+            <p> <strong>Reseña: </strong> {libroSeleccionado.resena}</p>
           </div>
         ) : (
           <h1>No se encontró el libro</h1>

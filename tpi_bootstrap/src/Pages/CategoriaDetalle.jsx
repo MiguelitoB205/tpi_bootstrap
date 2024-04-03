@@ -3,9 +3,7 @@ import   {useParams}  from "react-router-dom"
 import Header from "../Components/Header"
 import Footer from "../Components/Footer"
 import { useState } from 'react'
-import {Link, Outlet} from 'react-router-dom'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import { useLocalStorage } from "../Components/useLocalStorage"
 import ProductoList from "../Components/ProductoList"
 
