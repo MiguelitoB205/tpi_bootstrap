@@ -117,18 +117,35 @@ const ProductoDetalle= () =>{
         precio: '$460.990',
         resena: 'Para los fanáticos de la poesía, es un libro para aprender a dedicar poemas y canciones a sus parejas, escrito por un gran poéta sudamericano.'
       
-    }
-
+    },{
+      id: 11,
+      imagen: 'https://www.librerialemus.com/imagenes/9788467/978846702528.GIF',
+      nombre: 'Historia de la filosofía',
+      titulo: 'Sin temor ni temblor',
+      autor: 'Fernando Savater',
+      categoria: 'Filosofía y religión',
+      precio: '$290.999',
+      resena: 'Es un recorrido históirico, comenzando por los orígenes de esta corriente con Sócrates, luego se continúa con Platón y con Aristóteles. Se menciona sobre la dialéctica, el origen del capital, como usar el razonamiento. Libro apto para aquéllos que quieren apoprender la filosofía.',
+      categoria_id: 1
+    },{ id: 12, imagen: 'https://files.logoscdn.com/v1/assets/1400593/optimized?w=250&m=limit&h=254', nombre: 'Catecismo de la Iglesia Católica',titulo: 'Catecismo de la Iglesia Católica', autor: 'Juan Pablo II', categoria: 'Filosofía y religión', precio: '$36.000', resena: 'Contiene estractos de la Biblia, explicaciones de cómo vivir la fé católica, cuáles son los Sacramentos, los 10 mandamientos de Dios, los mandamientos de la Iglesia, qué pecados impiden comulgar del cuerpo de Cristo y también cómo orar a Dios', categoria_id: 1 },
+    { id: 13, imagen: 'https://books.google.com.co/books/publisher/content?id=xzJjBgAAQBAJ&hl=es&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U1eTrwwEJZSFxORwKrzaeE5C-a9Uw&w=1280', nombre: 'Crónica de una muerte anunciada', titulo: 'Crónica de una muerte anunciada', autor: 'Gabriel García Márquez', categoria: 'Literatura', precio: '$123.000', resena: 'Para los amamntes del suspenso, es un libro entretenido, escrito por un gran autor colombiano que ganaba premios Nóbel de Literatura', categoria_id: 7},
+    { id: 14, imagen: 'https://libreriadelau.vtexassets.com/arquivos/ids/31989090-800-auto?v=638223751227000000&width=800&height=auto&aspect=true', nombre: 'Economía ecológica y educación', titulo: 'Economía ecológica y educación', autor: 'José García y Alma Navarro', categoria: 'Ciencias Naturales', precio: '$44.000', resena: 'Aquéllos que quieren aprender a cuidar el medio ambiente, este es un ejemplar para seguir las pautas de cómo hacerlo.', categoria_id: 3}
+    , 
+    {id: 15, imagen: 'https://www.tornamesa.co/imagenes_grandes/9789588/978958894051.GIF', nombre: ' La Clave Secreta del Universo', titulo: 'La Clave Secreta del Universo', autor: 'Lucy & Steve Hawking', categoria: 'Ciencias Naturales', precio: '$50.000', resena: 'Para aquéllos que les gusta explorar el universo y conocer la verdad, este es un ejemplar para adquirir conocimiento astronómico, cómo se forman las galaxias y como fueron formados los planetas.', categoria_id: 3},
+    { id: 16, imagen: 'https://makemake.com.co/makemake/fichas/MM1474/art/portadaOptim.jpg', nombre: 'Caperucita Roja y otras historias perversas', titulo: 'Caperucita Roja y otras historias perversas',
+   autor: 'Triunfo Arciniégas', categoria: 'Infantil', precio: '$59.990', resena: 'Para los amantes de la literatura infantil, este es un ejemplar para leerlo y entretenerse. Escrito por Triunfo Arciniégas, un gran autor de la literatura infantil',
+    categoria_id: 6  }
   ]
   const params = useParams();
   const libroSeleccionado = libros.find(libro => libro.id === Number(params.id));
   console.log(libroSeleccionado);
+  
   return (
     <>
       <Header />
       <div >
         {libroSeleccionado ? (
-          <div style={{backgroundColor: 'violet', fontSize: '40px', justifyContent:'center'}}> 
+          <div style={{backgroundColor: 'violet', fontSize: '20px', justifyContent:'center'}}> 
             <h1> {libroSeleccionado.nombre}</h1>
             <img src={libroSeleccionado.imagen} alt={libroSeleccionado.nombre}
             width='300px' height='200px' />
@@ -139,7 +156,7 @@ const ProductoDetalle= () =>{
             <p>Reseña: {libroSeleccionado.resena}</p>
           </div>
         ) : (
-          <p>No se encontró el libro</p>
+          <h1>No se encontró el libro</h1>
         )}
       </div>
       <Footer />

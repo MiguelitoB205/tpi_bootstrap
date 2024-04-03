@@ -7,17 +7,21 @@ const CategoriaList = ({item}) => {
 
   return (
     <div >
-
       <div  >
             <Link to={'/categoriaDetalle/' + categoria_id}  >
           <div >  
-            <h4>{nombre}</h4>
+            <button type="button"
+      style={{ backgroundColor: 'darkblue', 
+      fontSize: '20px', color: 'aquamarine', 
+      borderRadius: '45px', width:'150px', height:'50px'
+    }}>{nombre}</button>
             </div>
             </Link>
             </div>
         
         <Outlet/>
     </div>
+    
   )
 }
 

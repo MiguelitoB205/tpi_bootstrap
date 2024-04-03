@@ -14,10 +14,16 @@ const CategoriaContainer=()=>{
 
     
     return(
-        <div style={{display: 'grid', justifyContent: 'space-between', gridTemplateColumns: '50% 50%'}}>
+        <>
+            <h2 style={{color: 'blue', backgroundColor: 'pink', 
+            fontSize: '34px', textAlign: 'center', padding: '20px'}}>Categorías</h2>
+        <div style={{display: 'flex', flexDirection: 'row',
+        backgroundColor: 'violet',
+        padding: '20px', justifyContent: 'space-between', gridTemplateColumns: '50% 50%'}}>
             {categorias.map(categoria =>
                 <CategoriaList  key={categoria.categoria_id} item={categoria}/>)}
         </div>
+                </>
     )
 }
 export default CategoriaContainer;

@@ -2,11 +2,17 @@ import React from "react"
 import   {useParams}  from "react-router-dom"
 import Header from "../Components/Header"
 import Footer from "../Components/Footer"
-
+import { useState } from 'react'
+import {Link, Outlet} from 'react-router-dom'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useLocalStorage } from "../Components/useLocalStorage"
+import ProductoList from "../Components/ProductoList"
 
 const CategoriaDetalle= () => {
-
-  const libros=[
+ 
+ 
+  const [libros, setLibros]= useState ( [
     {
       id: 1,
       imagen: 'https://storage.googleapis.com/catalogo-libros/extralarge/bd060bfa-a375-991a-06ec-5eea8e6d4998_imagen.PNG',
@@ -101,7 +107,7 @@ const CategoriaDetalle= () => {
         autor: 'Aurelio Baldor',
         categoria: 'Matemáticas',
         precio: '$360.990',
-        resena: 'Para los amantes de las matemáticas y el áñgebra, es un manual en donde aparecen ejercicios para el desarrollo de la lógica matemática',
+        resena: 'Para los amantes de las matemáticas y el álgebra, es un manual en donde aparecen ejercicios para el desarrollo de la lógica matemática',
         categoria_id: 4
       
     },
@@ -130,38 +136,98 @@ const CategoriaDetalle= () => {
         resena: 'Para los fanáticos de la poesía, es un libro para aprender a dedicar poemas y canciones a sus parejas, escrito por un gran poéta sudamericano.',
         categoria_id: 2
       
-    }
-
-  ]
-  const params = useParams()
-  
-
-  const categoriasSeleccionadas = libros.find(libro=> libro.categoria_id ===Number(params.categoria_id));
+    },{
+      id: 11,
+      imagen: 'https://www.librerialemus.com/imagenes/9788467/978846702528.GIF',
+      nombre: 'Historia de la filosofía',
+      titulo: 'Sin temor ni temblor',
+      autor: 'Fernando Savater',
+      categoria: 'Filosofía y religión',
+      precio: '$290.999',
+      resena: 'Es un recorrido históirico, comenzando por los orígenes de esta corriente con Sócrates, luego se continúa con Platón y con Aristóteles. Se menciona sobre la dialéctica, el origen del capital, como usar el razonamiento. Libro apto para aquéllos que quieren apoprender la filosofía.',
+      categoria_id: 1
+    },{ id: 12, imagen: 'https://files.logoscdn.com/v1/assets/1400593/optimized?w=250&m=limit&h=254', nombre: 'Catecismo de la Iglesia Católica',titulo: 'Catecismo de la Iglesia Católica', autor: 'Juan Pablo II', categoria: 'Filosofía y religión', precio: '$36.000', resena: 'Contiene estractos de la Biblia, explicaciones de cómo vivir la fé católica, cuáles son los Sacramentos, los 10 mandamientos de Dios, los mandamientos de la Iglesia, qué pecados impiden comulgar del cuerpo de Cristo y también cómo orar a Dios', categoria_id: 1 },
+    { id: 13, imagen: 'https://books.google.com.co/books/publisher/content?id=xzJjBgAAQBAJ&hl=es&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U1eTrwwEJZSFxORwKrzaeE5C-a9Uw&w=1280', nombre: 'Crónica de una muerte anunciada', titulo: 'Crónica de una muerte anunciada', autor: 'Gabriel García Márquez', categoria: 'Literatura', precio: '$123.000', resena: 'Para los amamntes del suspenso, es un libro entretenido, escrito por un gran autor colombiano que ganaba premios Nóbel de Literatura', categoria_id: 7},
+    { id: 14, imagen: 'https://libreriadelau.vtexassets.com/arquivos/ids/31989090-800-auto?v=638223751227000000&width=800&height=auto&aspect=true', nombre: 'Economía ecológica y educación', titulo: 'Economía ecológica y educación', autor: 'José García y Alma Navarro', categoria: 'Ciencias Naturales', precio: '$44.000', resena: 'Aquéllos que quieren aprender a cuidar el medio ambiente, este es un ejemplar para seguir las pautas de cómo hacerlo.', categoria_id: 3}, 
+    {id: 15, imagen: 'https://www.tornamesa.co/imagenes_grandes/9789588/978958894051.GIF', nombre: ' La Clave Secreta del Universo', titulo: 'La Clave Secreta del Universo', autor: 'Lucy & Steve Hawking', categoria: 'Ciencias Naturales', precio: '$50.000', resena: 'Para aquéllos que les gusta explorar el universo y conocer la verdad, este es un ejemplar para adquirir conocimiento astronómico, cómo se forman las galaxias y como fueron formados los planetas.', categoria_id: 3},
+    { id: 16, imagen: 'https://makemake.com.co/makemake/fichas/MM1474/art/portadaOptim.jpg', nombre: 'Caperucita Roja y otras historias perversas', titulo: 'Caperucita Roja y otras historias perversas',
+   autor: 'Triunfo Arciniégas', categoria: 'Infantil', precio: '$59.990', resena: 'Para los amantes de la literatura infantil, este es un ejemplar para leerlo y entretenerse. Escrito por Triunfo Arciniégas, un gran autor de la literatura infantil',
+    categoria_id: 6  }
     
-    console.log(categoriasSeleccionadas);
+  ])
+  const [favoritos, setFavoritos] = useState([])
 
+  const { setItem } = useLocalStorage('libros')
+  
+  const [show, setShow] = useState(false)
+  const [error, setError] = useState (false)
+  
+  const params = useParams()
+   
+  const categoriasFiltradas = libros.filter((libro => libro.categoria_id===Number(params.categoria_id)) ) 
+  const categoriasSeleccionadas = categoriasFiltradas.map(category=><div>
+    <div style={{backgroundColor: 'skyblue', borderRadius: '50px', margin: '27px', padding: '27px'}}>
+      <Link to ={'/productoDetalle/' + category.id}>
+    <div>
+    <h1 style={{fontSize: '40px', color: 'blueviolet'}}>{category.nombre}</h1>
+    <img src={category.imagen} width='200px' height='190px' />
+    <p><strong>Título: </strong>  {category.titulo}</p>
+    <p> <strong>Autor: </strong>{category.autor}</p>
+    <p><strong>Categoría: </strong>{category.categoria}</p>
+    <p><strong>{category.precio}</strong></p>
+    <p><strong>Descripción: </strong>{category.resena}</p>
+    </div> 
+      </Link>
+      <Outlet/>
+      <button onClick={()=>setItem(libros)}>
+            <FontAwesomeIcon icon={faHeart} style={{width: '50px', height: '50px', color: 'red', backgroundColor: 'pink'}}/>
+        </button>
+    </div>
+  </div>
+    )
+   
   
     return(
       <>
       <Header/>
-      <div style={{backgroundColor: 'violet', fontSize: '30px'}}>
-        {categoriasSeleccionadas ? (
-          <div key={categoriasSeleccionadas.categoria_id}>
-            <h1>{categoriasSeleccionadas.nombre}</h1>
-            <img src={categoriasSeleccionadas.imagen} alt="" width='350px' height='250px' />
-            <p><strong>Título: </strong> {categoriasSeleccionadas.titulo}</p>
-            <p><strong>Autor: </strong> {categoriasSeleccionadas.autor}</p>
-            <p><strong>Categoría: </strong> {categoriasSeleccionadas.categoria}</p>
-            <p><strong>Precio: </strong>{categoriasSeleccionadas.precio}</p>
-            <p><strong>Reseña: </strong> {categoriasSeleccionadas.resena}</p>
+      <div style={{padding: '35px', textAlign: 'center'}}>
+
+        <h1 style={{ fontSize: '60px', color: 'darkblue' }}>Los libros más populares</h1>
+        
+       </div>
+        <div style={{display: 'grid', gridTemplateColumns: '33% 33% 33%', backgroundColor: 'violet'}}>
+
+        
+        {categoriasFiltradas.map(category =>  <ProductoList favoritos={favoritos} setFavoritos={setFavoritos} key={category.categoria_id} objeto={category} />
+          )} 
           </div>
-        ): (
-          <h1>Error del servidor!!!</h1>
-        )}
-      </div>
-      <Footer/>
-      </>
+         
+        
+            <h2 style={{ color: 'darkblue', fontSize: '45px' }}>Tus libros favoritos</h2>
+          <div>
+            <ul style={{ display: 'grid', gridTemplateColumns: '33% 33% 33%' }}>
+              
+              {favoritos.map(favorito => (
+                <ul key={favorito.id}>
+                  <h3>{favorito.nombre}</h3>
+                  <p><img src={favorito.imagen} alt="" width='150px' height='160px' /></p>
+                  <p><strong>Título: </strong>{favorito.titulo}</p>
+                  <p><strong>Autor: </strong>{favorito.autor}</p>
+                  <p><strong>Categoría: </strong>{favorito.categoria}</p>
+                  <p>{favorito.precio}</p>
+                  <p><strong>Descripción: </strong> {favorito.resena}</p>
+                 
+                  <ul>
+               
+                  </ul>
+             
+                </ul>
+              ))}
+            </ul>
+          </div>
+     <Footer/>
+    </>
       
-    )
-}
+      )
+    }
 export default CategoriaDetalle

@@ -3,7 +3,9 @@ import CategoriasContainer from "../Components/CategoriasContainer"
 import  ProductoList  from "../Components/ProductoList"
 import Footer from './Footer'
 import { useState } from "react"
-import CategoriaContainer from "./CategoriasContainer"
+
+
+
 const Home = ()=>{
       const [favoritos, setFavoritos] = useState([])
       const libros=[
@@ -123,6 +125,7 @@ const Home = ()=>{
             }
         
           ]
+  
 
 
    
@@ -130,19 +133,24 @@ const Home = ()=>{
         <>
         <Header />
         <CategoriasContainer />
-       
-        <div style={{display: 'grid', gridTemplateColumns: '33% 33% 33%', backgroundColor: 'violet'}}>
+       <div style={{padding: '35px', textAlign: 'center'}}>
 
         <h1 style={{ fontSize: '60px', color: 'darkblue' }}>Los libros más populares</h1>
         
+       </div>
+        <div style={{display: 'grid', gridTemplateColumns: '33% 33% 33%', backgroundColor: 'violet'}}>
+
+        
         {libros.map(libro => (
           <ProductoList favoritos={favoritos} setFavoritos={setFavoritos} key={libro.id} objeto={libro} />
-          ))}
+          ))}  
           </div>
+         
         
-          <div>
             <h2 style={{ color: 'darkblue', fontSize: '45px' }}>Tus libros favoritos</h2>
+          <div>
             <ul style={{ display: 'grid', gridTemplateColumns: '33% 33% 33%' }}>
+              
               {favoritos.map(favorito => (
                 <ul key={favorito.id}>
                   <h3>{favorito.nombre}</h3>
@@ -152,14 +160,21 @@ const Home = ()=>{
                   <p><strong>Categoría: </strong>{favorito.categoria}</p>
                   <p>{favorito.precio}</p>
                   <p><strong>Descripción: </strong> {favorito.resena}</p>
+                 
+                  <ul>
+               
+                  </ul>
+             
                 </ul>
               ))}
             </ul>
           </div>
+          
        
         <Footer />
       </>
       );
     
 }
+ 
 export default Home
