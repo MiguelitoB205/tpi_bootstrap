@@ -7,7 +7,7 @@ import { useState } from "react"
 
 
 const Home = ()=>{
-      const [favoritos, setFavoritos] = useState([])
+      
       const libros=[
             {
               id: 1,
@@ -125,10 +125,9 @@ const Home = ()=>{
             }
         
           ]
-  
-
-
-   
+          
+          const [favoritos, setFavoritos] = useState([]);
+         
       return (
         <>
         <Header />
@@ -152,8 +151,8 @@ const Home = ()=>{
             <ul style={{ display: 'grid', gridTemplateColumns: '33% 33% 33%' }}>
               
               {favoritos.map(favorito => (
-                <ul key={favorito.id}>
-                  <h3>{favorito.nombre}</h3>
+                <ul style={{backgroundColor: 'lightblue', margin: '30px', padding: '35px', borderRadius: '25px'}} key={favorito.id}>
+                  <h3 style={{margin: '29px', color: 'darkblue'}}>{favorito.nombre}</h3>
                   <p><img src={favorito.imagen} alt="" width='150px' height='160px' /></p>
                   <p><strong>Título: </strong>{favorito.titulo}</p>
                   <p><strong>Autor: </strong>{favorito.autor}</p>

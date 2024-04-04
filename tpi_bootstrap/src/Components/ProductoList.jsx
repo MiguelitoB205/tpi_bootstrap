@@ -1,12 +1,30 @@
 import {Link} from 'react-router-dom'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 
  const ProductoList = ({ favoritos, setFavoritos, objeto}) =>{
 
     const  {id, nombre, imagen, titulo, autor, categoria, precio, resena} = objeto
      
-   const miLocalStorage = localStorage.setItem('objeto', objeto)
+   
+
+    const handleToggleFavorito = (objeto) => {
+      // Verificar si el objeto ya está en favoritos
+      const index = favoritos.findIndex(fav => fav.id === objeto.id);
+      if (index === -1) {
+        // Si el objeto no está en favoritos, agregarlo
+        const nuevosFavoritos = [...favoritos, objeto];
+        setFavoritos(nuevosFavoritos);
+      } else {
+        // Si el objeto ya está en favoritos, eliminarlo
+        const nuevosFavoritos = favoritos.filter(fav => fav.id !== objeto.id);
+        setFavoritos(nuevosFavoritos);
+      }
+  
+      // Actualizar localStorage
+      localStorage.setItem('favoritos', JSON.stringify(favoritos));
+    };
     
   
 
@@ -24,8 +42,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
             <p><strong>Descripción: </strong>{resena}</p>
             
             </Link>
-            <button style={{margin:'35px'}} onClick={() =>{setFavoritos ([...favoritos, objeto] ), miLocalStorage}} >
-          <FontAwesomeIcon icon={faHeart} style={{width: '50px', height: '50px', color: 'red', backgroundColor: 'pink'}}/>
+            <button style={{ margin: '35px' }} onClick={() => handleToggleFavorito(objeto)}>
+        <FontAwesomeIcon icon={faHeart} style={{ width: '50px', height: '50px', color: 'red', backgroundColor: 'pink' }} />
       </button>
             </div>
 

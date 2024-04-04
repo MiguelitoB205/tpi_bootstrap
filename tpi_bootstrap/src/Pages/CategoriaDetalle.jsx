@@ -155,10 +155,9 @@ const CategoriaDetalle= () => {
   ])
   const [favoritos, setFavoritos] = useState([])
 
-  const { setItem } = useLocalStorage('libros')
   
-  const [show, setShow] = useState(false)
-  const [error, setError] = useState (false)
+  
+  
   
   const params = useParams()
    
@@ -183,12 +182,12 @@ const CategoriaDetalle= () => {
           </div>
          
         
-            <h2 style={{ color: 'darkblue', fontSize: '45px' }}>Tus libros favoritos</h2>
+            <h2 style={{ color: 'darkblue', fontSize: '45px', padding: '45px'}}>Tus libros favoritos</h2>
           <div>
             <ul style={{ display: 'grid', gridTemplateColumns: '33% 33% 33%' }}>
               
               {favoritos.map(favorito => (
-                <ul key={favorito.id}>
+                <ul style={{backgroundColor: 'lightblue', margin: '30px', padding: '35px', borderRadius: '25px'}} key={favorito.id}>
                   <h3>{favorito.nombre}</h3>
                   <p><img src={favorito.imagen} alt="" width='150px' height='160px' /></p>
                   <p><strong>Título: </strong>{favorito.titulo}</p>
